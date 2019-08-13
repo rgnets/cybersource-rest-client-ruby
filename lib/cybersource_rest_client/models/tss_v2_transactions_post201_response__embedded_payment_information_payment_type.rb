@@ -17,7 +17,6 @@ module CyberSource
     # A Payment Type is an agreed means for a payee to receive legal tender from a payer. The way one pays for a commercial financial transaction. Examples: Card, Bank Transfer, Digital, Direct Debit. 
     attr_accessor :name
 
-    # A Payment Type is enabled through a Method. Examples: Visa, Master Card, ApplePay, iDeal
     attr_accessor :method
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -32,7 +31,7 @@ module CyberSource
     def self.swagger_types
       {
         :'name' => :'String',
-        :'method' => :'String'
+        :'method' => :'TssV2TransactionsGet200ResponsePaymentInformationPaymentTypeMethod'
       }
     end
 

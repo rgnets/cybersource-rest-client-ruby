@@ -22,7 +22,6 @@ module CyberSource
 
     attr_accessor :funding_source
 
-    # A Payment Type is enabled through a Method. Examples: Visa, Master Card, ApplePay, iDeal
     attr_accessor :method
 
     # A Payment Type Authentication Method is the means used to verify that the presenter of the Payment Type credential is an authorized user of the Payment Instrument. Examples: 3DSecure – Verified by Visa, 3DSecure – MasteCard Secure Code 
@@ -45,7 +44,7 @@ module CyberSource
         :'name' => :'String',
         :'sub_type_name' => :'String',
         :'funding_source' => :'TssV2TransactionsGet200ResponsePaymentInformationPaymentTypeFundingSource',
-        :'method' => :'String',
+        :'method' => :'TssV2TransactionsGet200ResponsePaymentInformationPaymentTypeMethod',
         :'authentication_method' => :'String'
       }
     end

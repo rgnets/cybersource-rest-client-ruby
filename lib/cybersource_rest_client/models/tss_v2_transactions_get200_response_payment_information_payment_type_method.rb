@@ -13,30 +13,36 @@ Swagger Codegen version: 2.2.3
 require 'date'
 
 module CyberSource
-  class Ptsv2paymentsidcapturesAggregatorInformation
-    # Value that identifies you as a payment aggregator. Get this value from the processor.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR6 - Position: 95-105 - Field: MasterCard Payment Facilitator ID  **FDC Compass**\\ This value must consist of uppercase characters.  For processor-specific information, see the `aggregator_id` field in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) 
-    attr_accessor :aggregator_id
-
-    # Your payment aggregator business name.  **American Express Direct**\\ The maximum length of the aggregator name depends on the length of the sub-merchant name. The combined length for both values must not exceed 36 characters.\\  #### CyberSource through VisaNet With American Express, the maximum length of the aggregator name depends on the length of the sub-merchant name. The combined length for both values must not exceed 36 characters. The value for this field does not map to the TC 33 capture file5.  **FDC Compass**\\ This value must consist of uppercase characters.  For processor-specific information, see the aggregator_name field in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) 
+  class TssV2TransactionsGet200ResponsePaymentInformationPaymentTypeMethod
+    # A Payment Type is enabled through a Method. Examples: Visa, Master Card, ApplePay, iDeal 
     attr_accessor :name
 
-    attr_accessor :sub_merchant
+    # An operator of the Payment Type Method. Examples: Visa, PayPal, Google, Apple 
+    attr_accessor :operator
+
+    # A Payment Scheme is a formal, commercial relationship amongst payment ecosystem players (banks and merchants, typically, extended to include merchants payment service providers, banks processors, etc.), whereby the participants agree to an organizational, legal, and operational framework necessary for the functioning of the services these entities provide. Examples: Visa, Master Card, ApplePay, iDeal 
+    attr_accessor :scheme_name
+
+    # Operator of the Scheme. Examples European Payment Council, Visa, Currence Ideal B.V 
+    attr_accessor :scheme_operator
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'aggregator_id' => :'aggregatorId',
         :'name' => :'name',
-        :'sub_merchant' => :'subMerchant'
+        :'operator' => :'operator',
+        :'scheme_name' => :'schemeName',
+        :'scheme_operator' => :'schemeOperator'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'aggregator_id' => :'String',
         :'name' => :'String',
-        :'sub_merchant' => :'Ptsv2paymentsidcapturesAggregatorInformationSubMerchant'
+        :'operator' => :'String',
+        :'scheme_name' => :'String',
+        :'scheme_operator' => :'String'
       }
     end
 
@@ -48,16 +54,20 @@ module CyberSource
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'aggregatorId')
-        self.aggregator_id = attributes[:'aggregatorId']
-      end
-
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'subMerchant')
-        self.sub_merchant = attributes[:'subMerchant']
+      if attributes.has_key?(:'operator')
+        self.operator = attributes[:'operator']
+      end
+
+      if attributes.has_key?(:'schemeName')
+        self.scheme_name = attributes[:'schemeName']
+      end
+
+      if attributes.has_key?(:'schemeOperator')
+        self.scheme_operator = attributes[:'schemeOperator']
       end
     end
 
@@ -65,43 +75,13 @@ module CyberSource
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@aggregator_id.nil? && @aggregator_id.to_s.length > 20
-        invalid_properties.push('invalid value for "aggregator_id", the character length must be smaller than or equal to 20.')
-      end
-
-      if !@name.nil? && @name.to_s.length > 37
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 37.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@aggregator_id.nil? && @aggregator_id.to_s.length > 20
-      return false if !@name.nil? && @name.to_s.length > 37
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] aggregator_id Value to be assigned
-    def aggregator_id=(aggregator_id)
-      if !aggregator_id.nil? && aggregator_id.to_s.length > 20
-        fail ArgumentError, 'invalid value for "aggregator_id", the character length must be smaller than or equal to 20.'
-      end
-
-      @aggregator_id = aggregator_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if !name.nil? && name.to_s.length > 37
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 37.'
-      end
-
-      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -109,9 +89,10 @@ module CyberSource
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          aggregator_id == o.aggregator_id &&
           name == o.name &&
-          sub_merchant == o.sub_merchant
+          operator == o.operator &&
+          scheme_name == o.scheme_name &&
+          scheme_operator == o.scheme_operator
     end
 
     # @see the `==` method
@@ -123,7 +104,7 @@ module CyberSource
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [aggregator_id, name, sub_merchant].hash
+      [name, operator, scheme_name, scheme_operator].hash
     end
 
     # Builds the object from hash
