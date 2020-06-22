@@ -48,9 +48,9 @@ module CyberSource
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@customer_id.nil? && @customer_id.to_s.length > 22
-        invalid_properties.push('invalid value for "customer_id", the character length must be smaller than or equal to 22.')
-      end
+      # if !@customer_id.nil? && @customer_id.to_s.length > 22
+        # invalid_properties.push('invalid value for "customer_id", the character length must be smaller than or equal to 22.')
+      # end
 
       if !@customer_id.nil? && @customer_id.to_s.length < 16
         invalid_properties.push('invalid value for "customer_id", the character length must be great than or equal to 16.')
@@ -62,7 +62,7 @@ module CyberSource
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@customer_id.nil? && @customer_id.to_s.length > 22
+      # return false if !@customer_id.nil? && @customer_id.to_s.length > 22
       return false if !@customer_id.nil? && @customer_id.to_s.length < 16
       true
     end
@@ -70,9 +70,9 @@ module CyberSource
     # Custom attribute writer method with validation
     # @param [Object] customer_id Value to be assigned
     def customer_id=(customer_id)
-      if !customer_id.nil? && customer_id.to_s.length > 22
-        fail ArgumentError, 'invalid value for "customer_id", the character length must be smaller than or equal to 22.'
-      end
+      # if !customer_id.nil? && customer_id.to_s.length > 22
+        # fail ArgumentError, 'invalid value for "customer_id", the character length must be smaller than or equal to 22.'
+      # end
 
       if !customer_id.nil? && customer_id.to_s.length < 16
         fail ArgumentError, 'invalid value for "customer_id", the character length must be great than or equal to 16.'
