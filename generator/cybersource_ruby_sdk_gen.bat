@@ -73,6 +73,8 @@ rename "w:\tmsv2customers__embedded_default_payment_instrument__embedded_instrum
 
 powershell -Command "(Get-Content ..\lib\cybersource_rest_client.rb) | ForEach-Object { $_ -replace 'cybersource_rest_client/models/tmsv2customers__embedded_default_payment_instrument__embedded_instrument_identifier_processing_information_authorization_options_initiator_merchant_initiated_transaction', 'cybersource_rest_client/models/tmsv2customers_merchant_initiated_transaction' } | Set-Content ..\lib\cybersource_rest_client.rb"
 
+powershell -Command "(Get-Content ..\lib\cybersource_rest_client.rb) | ForEach-Object { $_ -replace 'cybersource_rest_client/models/tmsv2customers_authorization_options_initiator_merchant_initiated_transaction', 'cybersource_rest_client/models/tmsv2customers_merchant_initiated_transaction' } | Set-Content ..\lib\cybersource_rest_client.rb"
+
 rename "y:\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction.md" "Tmsv2customersMerchantInitiatedTransaction.md"
 
 REM #####################################################################################################################################################
