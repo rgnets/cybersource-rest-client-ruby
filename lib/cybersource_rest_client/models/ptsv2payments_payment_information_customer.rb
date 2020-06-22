@@ -14,20 +14,20 @@ require 'date'
 
 module CyberSource
   class Ptsv2paymentsPaymentInformationCustomer
-    # Unique identifier for the customer's card and billing information.  When you use Payment Tokenization or Recurring Billing and you include this value in your request, many of the fields that are normally required for an authorization or credit become optional.  **NOTE** When you use Payment Tokenization or Recurring Billing, the value for the Customer ID is actually the Cybersource payment token for a customer. This token stores information such as the consumer’s card number so it can be applied towards bill payments, recurring payments, or one-time payments. By using this token in a payment API request, the merchant doesn't need to pass in data such as the card number or expiration date in the request itself.  For details, see the `subscription_id` field description in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/) 
-    attr_accessor :customer_id
+    # Unique identifier for the Customer token used in the transaction. When you include this value in your request, many of the fields that are normally required for an authorization or credit become optional. 
+    attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer_id' => :'customerId'
+        :'id' => :'id'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'customer_id' => :'String'
+        :'id' => :'String'
       }
     end
 
@@ -39,8 +39,8 @@ module CyberSource
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'customerId')
-        self.customer_id = attributes[:'customerId']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
     end
 
@@ -48,13 +48,37 @@ module CyberSource
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@id.nil? && @id.to_s.length > 32
+        invalid_properties.push('invalid value for "id", the character length must be smaller than or equal to 32.')
+      end
+
+      if !@id.nil? && @id.to_s.length < 1
+        invalid_properties.push('invalid value for "id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@id.nil? && @id.to_s.length > 32
+      return false if !@id.nil? && @id.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if !id.nil? && id.to_s.length > 32
+        fail ArgumentError, 'invalid value for "id", the character length must be smaller than or equal to 32.'
+      end
+
+      if !id.nil? && id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "id", the character length must be great than or equal to 1.'
+      end
+
+      @id = id
     end
 
     # Checks equality by comparing each attribute.
@@ -62,7 +86,7 @@ module CyberSource
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer_id == o.customer_id
+          id == o.id
     end
 
     # @see the `==` method
@@ -74,7 +98,7 @@ module CyberSource
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [customer_id].hash
+      [id].hash
     end
 
     # Builds the object from hash
