@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'activesupport', '>= 4.2.0'
   s.add_runtime_dependency 'interface','~> 1.0', '>= 1.0.4'
-  s.add_runtime_dependency 'jwt', '~> 2.1.0'
+  s.add_runtime_dependency 'jwt', '>= 2.1.0'
   
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'rubocop', '~> 0.57.2'
